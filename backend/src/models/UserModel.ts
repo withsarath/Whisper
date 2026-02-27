@@ -4,7 +4,7 @@ export interface Iuser extends Document {
   clerkId: string;
   name: string;
   email: string;
-  avatar?: string;
+  avatar: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -30,7 +30,7 @@ const userSchema = new Schema<Iuser>(
     },
     avatar: {
       type: String,
-      required: true,
+      default: ""
     },
   },
   { timestamps: true },

@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 export const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.DATABASE_URI as string);
+    const uri = process.env.DATABASE_URI;
+    if(!uri){
+      throw new Error("Missing required env var: DATABASE_URI")
+    }
+    await mongoose.connect(uri);
     console.log("Database Connected Successfully");
   } catch (error) {
     console.error("Error in connecting Database:", error);
