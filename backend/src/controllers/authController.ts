@@ -19,7 +19,7 @@ export const getMe = async (
     res.status(200).json(user);
   } catch (error) {
     res.status(500)
-    next();
+    next(error);
   }
 };
 
@@ -39,7 +39,7 @@ export const authCallback = async (req: Request, res: Response, next: NextFuncti
         clerkId,
         name: clerkUser.firstName
           ? `${clerkUser.firstName} ${clerkUser.lastName || ""}`.trim()
-          : clerkUser.emailAddresses[0]?.emailAddress.split("@")[0],
+          : clerkUser.emailAddresses[0]?.emailAddress?.split("@")[0],
         email: clerkUser.emailAddresses[0]?.emailAddress,
         avatar: clerkUser.imageUrl,
       });
@@ -47,6 +47,6 @@ export const authCallback = async (req: Request, res: Response, next: NextFuncti
     res.json(user);
   } catch (error) {
     res.status(500)
-    next()
+    next(error)
   }
 };
